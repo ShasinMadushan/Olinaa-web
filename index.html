@@ -277,6 +277,35 @@ footer{padding-bottom:60px}
  #sh h3,#sh #shpr,#sh #colourwrap,#sh #sizetitle,#sh .sz,#sh .details,#sh .stock-hint,#sh .wa{grid-column:2}
  #sh .gallery-main{height:clamp(300px,48vh,490px)}
 }
+
+/* Owner-only compact inventory manager */
+.owner-overview{margin:15px 0 12px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.owner-stat{border:1px solid #d9b25f2e;border-radius:15px;background:#ffffff07;padding:13px 12px}
+.owner-stat strong{display:block;font:600 27px var(--serif);color:var(--gold2)}
+.owner-stat span{font-size:12px;color:var(--mut)}
+.owner-tools{margin:12px 0;padding:14px;border-radius:19px;border:1px solid #d9b25f36;background:#ffffff04}
+.owner-tools h3{font:500 23px var(--serif);margin-bottom:3px}
+.owner-tools .mini{margin-bottom:11px}
+.owner-filters{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.owner-filters button{border:1px solid #ffffff2c;background:#ffffff09;color:var(--tx);font:500 12px var(--sans);padding:9px 12px;border-radius:30px;cursor:pointer}
+.owner-filters button.on{background:var(--gold);border-color:var(--gold);color:#17101c}
+.owner-filters em{font-style:normal;opacity:.72;margin-left:3px}
+.owner-no-results{font-size:13px;text-align:center;color:var(--mut);padding:22px 8px}
+.owner-status{display:inline-block;font-size:11px;border-radius:20px;padding:5px 10px;background:#d9b25f21;color:var(--gold2);margin:8px 0}
+.owner-status.danger{color:#ffacaa;background:#ff777719}
+.owner-status.hidden-status{color:#c4b8c7;background:#ffffff0d}
+.owner-colour-alert{font-size:12px;line-height:1.55;color:var(--mut);margin:3px 0 7px}
+.owner-mini-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.owner-mini-head small{color:var(--gold2)}
+.owner-quick{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}
+.owner-quick button{border:1px solid #d9b25f55;border-radius:24px;background:#ffffff07;color:var(--tx);padding:9px 11px;cursor:pointer;font:500 12px var(--sans)}
+.owner-quick button.primary-action{background:var(--gold);color:#17101c;border-color:var(--gold)}
+.owner-quick button.delete-action{color:#ffaaaa;border-color:#ff77774a}
+.owner-size-total{margin:8px 0 1px;padding:10px;border:1px solid #d9b25f2e;border-radius:12px;background:#d9b25f10;color:var(--gold2);font-size:13px;line-height:1.6}
+.owner-size-total strong{font-size:17px}
+.owner-colour-total{margin:8px 0 0;color:var(--gold2);font-size:12px}
+.owner-default-sizes[hidden]{display:none!important}
+@media(min-width:760px){.owner-overview{grid-template-columns:repeat(4,minmax(0,1fr))}}
 </style></head>
 <body>
 <svg width="0" height="0" style="position:absolute"><defs>
@@ -321,8 +350,8 @@ footer{padding-bottom:60px}
 
 <div id="adm"><div class="ah"><b class="gold">Owner panel</b><button class="ib" id="ax">✕</button></div>
 <div id="lock"><p class="lead" id="lm">Owner sign in</p><input id="em" type="email" placeholder="Email" autocomplete="username"><input id="pin" type="password" placeholder="Password" autocomplete="current-password" style="width:100%;letter-spacing:0;font-size:15px"><button class="cta on" id="pgo">Sign in</button></div>
-<div id="ab" hidden><button class="lk" id="so">Sign out</button><button class="cta on" id="add" style="width:100%;justify-content:center">＋ Add clothes</button><div id="al"></div></div></div>
-<div id="fm"><h3 style="font:500 32px var(--serif)">Add clothes</h3><label class="photo-add">＋ Add product photos (optional)<input type="file" id="fi" accept="image/jpeg,image/png,image/webp" multiple></label><div class="mini">Choose one or several photos. Tap × to remove. First photo is the cover. Max 8 images, 5 MB each.</div><div class="form-photos" id="previews"></div><div class="colour-editor"><div class="colour-editor-title">Colour options <button type="button" id="addcolour">+ Add colour</button></div><p class="mini">For each colour, set its available sizes and assign the matching photos. Leave this empty for a single-colour/standard item.</p><div id="colourrows"></div></div><input id="fn" placeholder="Name, e.g. Rose Satin Dress"><input id="fpz" type="number" inputmode="numeric" placeholder="Price in Rs."><select id="fc"></select><textarea id="fd" placeholder="Product details: fabric, fit, measurements, colour, care instructions..."></textarea><p class="lead" style="margin:4px 0 0">How many pieces in each size?</p><div class="fs" id="fs"></div><button class="cta on" id="fsv" style="justify-content:center">Save piece</button><button class="lk" id="fcx">Cancel</button></div>
+<div id="ab" hidden><button class="lk" id="so">Sign out</button><div id="invsummary" class="owner-overview" aria-label="Inventory summary"></div><button class="cta on" id="add" style="width:100%;justify-content:center">＋ Add clothes</button><section class="owner-tools" aria-label="Inventory manager"><h3>Inventory Manager</h3><p class="mini">Stock alerts, filters & quick actions in one place</p><input id="ownersearch" type="search" placeholder="Search products or colours..." aria-label="Search inventory"><div id="ownerfilters" class="owner-filters" role="group" aria-label="Inventory filters"></div><div id="inventorycount" class="mini" style="margin-top:12px"></div></section><div id="al"></div></div></div>
+<div id="fm"><h3 style="font:500 32px var(--serif)">Add clothes</h3><label class="photo-add">＋ Add product photos (optional)<input type="file" id="fi" accept="image/jpeg,image/png,image/webp" multiple></label><div class="mini">Choose one or several photos. Tap × to remove. First photo is the cover. Max 8 images, 5 MB each.</div><div class="form-photos" id="previews"></div><div class="colour-editor"><div class="colour-editor-title">Colour options <button type="button" id="addcolour">+ Add colour</button></div><p class="mini">For each colour, set its available sizes and assign the matching photos. Leave this empty for a single-colour/standard item.</p><div id="colourrows"></div></div><input id="fn" placeholder="Name, e.g. Rose Satin Dress"><input id="fpz" type="number" inputmode="numeric" placeholder="Price in Rs."><select id="fc"></select><textarea id="fd" placeholder="Product details: fabric, fit, measurements, colour, care instructions..."></textarea><div id="defaultsizes" class="owner-default-sizes"><p class="lead" style="margin:4px 0 0">How many pieces in each size?</p><div class="fs" id="fs"></div></div><div id="formstocktotal" class="owner-size-total" aria-live="polite"></div><button class="cta on" id="fsv" style="justify-content:center">Save piece</button><button class="lk" id="fcx">Cancel</button></div>
 <div id="ov"></div>
 <div id="sh"><div class="grab"></div><div class="product-gallery"><div class="gallery-kicker"><span>OLINAA COLLECTION</span><span id="gallerylabel">PRODUCT PHOTOS</span></div><div class="gallery-main" id="shp"></div><div class="gallery-navigation" id="gnav"><button id="gprev" aria-label="Previous image">‹</button><span id="gcount"></span><button id="gnext" aria-label="Next image">›</button></div><div class="gallery-thumbs" id="gthumbs"></div></div><h3 id="sht"></h3><span class="gold" id="shpr" style="font:600 24px var(--serif)"></span><div id="colourwrap" class="colourwrap" hidden><div class="option-title">Select colour <span id="selectedcolour"></span></div><div id="colours" class="colours"></div></div><div class="option-title" id="sizetitle">Select size</div><div class="sz" id="szs"></div><p class="details" id="shdesc"></p><div class="stock-hint" id="stockhint"></div><a class="wa" id="wa" target="_blank" rel="noopener">Order on WhatsApp</a></div>
 </div>
@@ -437,7 +466,32 @@ $('#pgo').onclick=async()=>{const{error}=await sb.auth.signInWithPassword({email
 if(error){$('#pin').classList.add('bad');setTimeout(()=>$('#pin').classList.remove('bad'),500);$('#lm').textContent='Wrong email or password';return}
 $('#pin').value='';$('#lock').hidden=true;$('#ab').hidden=false;rl()};
 $('#so').onclick=async()=>{await sb.auth.signOut();$('#ab').hidden=true;$('#lock').hidden=false};
-function rl(){$('#al').innerHTML=P.map((p,k)=>`<div class="ar${p.h?' hd':''}"><div class="at"><div class="th" style="--c:${p.col}">${p.img?`<img src="${esc(p.img)}">`:''}</div><div><b>${esc(p.n)}</b><small>${fmt(p.p)} – ${esc(p.c)} · ${p.imgs.length} photo(s)</small></div></div>`+(colourNames(p).length?'<div class="mini">Stock managed by colour — select Edit details & photos</div>':Object.keys(p.s).map(z=>`<div class="st"><span>${esc(z)}</span><button data-k="${k}" data-z="${esc(z)}" data-d="-1">−</button><em>${p.s[z]}</em><button data-k="${k}" data-z="${esc(z)}" data-d="1">+</button></div>`).join(''))+`<div class="ac"><button data-k="${k}" data-edit>Edit details & photos</button><button data-k="${k}" data-h>${p.h?'Show':'Hide'}</button><button data-k="${k}" data-x>Delete</button></div></div>`).join('')}
+// Owner inventory is derived from colour quantities where configured; no manual double-entry.
+const countStock=st=>Object.values(st||{}).reduce((n,x)=>n+Math.max(0,Number(x)||0),0);
+function inventoryQty(p){const names=colourNames(p);return names.length?names.reduce((n,c)=>n+countStock(p.colourStock[c]),0):countStock(p.s)}
+function inventoryStatus(p){const q=inventoryQty(p);return p.h?'Hidden':q===0?'Out of stock':q<=3?'Low stock':'In stock'}
+function colourWarnings(p){return colourNames(p).filter(c=>countStock(p.colourStock[c])<=3).map(c=>`${c}: ${countStock(p.colourStock[c])===0?'out of stock':countStock(p.colourStock[c])+' left'}`)}
+let inventoryFilter='all';
+const inventoryFilters=[['all','All'],['attention','Needs attention'],['out','Out of stock'],['low','Low stock'],['hidden','Hidden']];
+function inventoryMatches(p,f){const s=inventoryStatus(p),warnings=colourWarnings(p);if(f==='all')return true;if(f==='hidden')return s==='Hidden';if(p.h)return false;if(f==='out')return s==='Out of stock';if(f==='low')return s==='Low stock'||warnings.some(w=>w.includes(' left'));return s==='Out of stock'||s==='Low stock'||warnings.length>0}
+function rl(){
+ const active=P.filter(p=>!p.h),out=active.filter(p=>inventoryQty(p)===0).length,low=active.filter(p=>inventoryQty(p)>0&&inventoryQty(p)<=3).length;
+ const nums=[['Products',P.length],['Total pieces',P.reduce((n,p)=>n+inventoryQty(p),0)],['Out of stock',out],['Low stock',low]];
+ $('#invsummary').innerHTML=nums.map(([label,value])=>`<div class="owner-stat"><strong>${value}</strong><span>${label}</span></div>`).join('');
+ const counts={all:P.length,attention:P.filter(p=>inventoryMatches(p,'attention')).length,out,low:P.filter(p=>inventoryMatches(p,'low')).length,hidden:P.filter(p=>p.h).length};
+ $('#ownerfilters').innerHTML=inventoryFilters.map(([key,label])=>`<button type="button" data-inventory-filter="${key}" class="${inventoryFilter===key?'on':''}" aria-pressed="${inventoryFilter===key}">${label} <em>${counts[key]}</em></button>`).join('');
+ const q=$('#ownersearch').value.trim().toLowerCase();
+ const list=P.map((p,k)=>({p,k})).filter(({p})=>inventoryMatches(p,inventoryFilter)&&(!q||[p.n,p.c,...colourNames(p)].join(' ').toLowerCase().includes(q)));
+ $('#inventorycount').textContent=`Showing ${list.length} of ${P.length} products`;
+ $('#al').innerHTML=list.length?list.map(({p,k})=>{
+  const s=inventoryStatus(p),n=inventoryQty(p),warnings=p.h?[]:colourWarnings(p);
+  const banner=s==='Out of stock'?'danger':s==='Hidden'?'hidden-status':'';
+  const sz=colourNames(p).length?'<p class="mini">Colour-based stock · Edit to restock a colour</p>':Object.keys(p.s).map(z=>`<div class="st"><span>${esc(z)}</span><button data-k="${k}" data-z="${esc(z)}" data-d="-1" aria-label="Reduce ${esc(z)} stock">−</button><em>${p.s[z]}</em><button data-k="${k}" data-z="${esc(z)}" data-d="1" aria-label="Increase ${esc(z)} stock">+</button></div>`).join('');
+  return `<div class="ar${p.h?' hd':''}"><div class="at"><div class="th" style="--c:${p.col}">${p.img?`<img src="${esc(p.img)}" alt="">`:''}</div><div><b>${esc(p.n)}</b><small>${fmt(p.p)} · ${esc(p.c)} · ${p.imgs.length} photos</small><small>${n} total piece${n===1?'':'s'}</small></div></div><span class="owner-status ${banner}">${s}</span>${warnings.length?`<p class="owner-colour-alert">⚠ ${esc(warnings.join(' · '))}</p>`:''}${sz}<div class="owner-quick"><button class="primary-action" data-k="${k}" data-edit>${n===0?'Restock / Edit':'Manage / Restock'}</button><button data-k="${k}" data-h>${p.h?'Show in shop':'Hide from shop'}</button><button class="delete-action" data-k="${k}" data-x>Delete</button></div></div>`;
+ }).join(''):'<p class="owner-no-results">No products match this filter.</p>';
+}
+$('#ownerfilters').onclick=e=>{const b=e.target.closest('[data-inventory-filter]');if(!b)return;inventoryFilter=b.dataset.inventoryFilter;rl()};
+$('#ownersearch').oninput=()=>rl();
 const em=e=>{if(!e)return'unknown error';if(typeof e==='string')return e;return e.message||JSON.stringify(e)};
 async function change(p,fields){const r=await sb.from('products').update(fields).eq('id',p.id).select().single();if(r.error){alert('Could not save: '+em(r.error));return false}Object.assign(p,mp(r.data));rl();draw();return true}
 $('#al').onclick=async e=>{const b=e.target.closest('button');if(!b)return;const p=P[+b.dataset.k];if(!p)return;
@@ -452,23 +506,32 @@ $('#add').onclick=()=>openForm();$('#fcx').onclick=()=>$('#fm').classList.remove
 $('#previews').onclick=e=>{const b=e.target.closest('[data-rm]');if(!b)return;formPhotos.splice(+b.dataset.rm,1);drawPhotos()};
 $('#previews').onchange=e=>{const select=e.target.closest('[data-photo-colour]');if(select)formPhotos[+select.dataset.photoColour].colour=select.value};
 const colourSizes=['S','M','L','XL','One'];
-function drawColours(){$('#colourrows').innerHTML=formColours.map((c,i)=>`<div class="owner-colour" data-colour-index="${i}"><div class="owner-colour-head"><input aria-label="Colour name" data-colour-name="${i}" placeholder="Colour name e.g. Burgundy" value="${esc(c.name)}"><button type="button" data-colour-remove="${i}">Remove</button></div><div class="mini">Available stock for this colour</div><div class="fs">${colourSizes.map(z=>`<label>${z}<input type="number" min="0" step="1" data-colour-stock="${i}" data-stock-size="${z}" value="${Number(c.stock[z]||0)}"></label>`).join('')}</div></div>`).join('')}
+function updateFormStockSummary(){
+ const colours=formColours.length>0;
+ $('#defaultsizes').hidden=colours;
+ const aggregate={};
+ if(colours){for(const c of formColours){for(const [size,v] of Object.entries(c.stock)){aggregate[size]=(aggregate[size]||0)+Math.max(0,Math.floor(Number(v)||0))}}}
+ else{$('#fs').querySelectorAll('input').forEach(i=>{aggregate[i.dataset.z]=Math.max(0,Math.floor(Number(i.value)||0))})}
+ const total=countStock(aggregate);
+ $('#formstocktotal').innerHTML=`<strong>Automatic total: ${total} pieces</strong><div>${colourSizes.map(z=>`${z}: ${aggregate[z]||0}`).join(' · ')}</div>${colours?'<small>Calculated from all colour quantities. No need to enter stock twice.</small>':''}`;
+}
+$('#fs').oninput=updateFormStockSummary;
+
+function drawColours(){$('#colourrows').innerHTML=formColours.map((c,i)=>`<div class="owner-colour" data-colour-index="${i}"><div class="owner-colour-head"><input aria-label="Colour name" data-colour-name="${i}" placeholder="Colour name e.g. Burgundy" value="${esc(c.name)}"><button type="button" data-colour-remove="${i}">Remove</button></div><div class="mini">Available stock for this colour</div><div class="fs">${colourSizes.map(z=>`<label>${z}<input type="number" min="0" step="1" data-colour-stock="${i}" data-stock-size="${z}" value="${Number(c.stock[z]||0)}"></label>`).join('')}</div><div class="owner-colour-total">Colour total: ${countStock(c.stock)} pieces</div></div>`).join('');updateFormStockSummary()}
 $('#addcolour').onclick=()=>{if(formColours.length>=12){alert('Maximum 12 colours.');return}formColours.push({name:'',stock:{}});drawColours();drawPhotos()};
 $('#colourrows').oninput=e=>{const name=e.target.closest('[data-colour-name]');if(name){const i=+name.dataset.colourName,old=formColours[i].name;formColours[i].name=name.value;formPhotos.forEach(p=>{if(p.colour===old)p.colour=name.value});drawPhotos();return}
-const st=e.target.closest('[data-colour-stock]');if(st){formColours[+st.dataset.colourStock].stock[st.dataset.stockSize]=Math.max(0,Math.floor(Number(st.value)||0))}};
+const st=e.target.closest('[data-colour-stock]');if(st){formColours[+st.dataset.colourStock].stock[st.dataset.stockSize]=Math.max(0,Math.floor(Number(st.value)||0));updateFormStockSummary();const total=st.closest('.owner-colour').querySelector('.owner-colour-total');if(total)total.textContent='Colour total: '+countStock(formColours[+st.dataset.colourStock].stock)+' pieces'}};
 $('#colourrows').onclick=e=>{const b=e.target.closest('[data-colour-remove]');if(!b)return;const i=+b.dataset.colourRemove,old=formColours[i].name;formColours.splice(i,1);formPhotos.forEach(p=>{if(p.colour===old)p.colour=''});drawColours();drawPhotos()};
 async function compress(file){if(file.size>5*1024*1024)throw Error(file.name+' exceeds 5 MB. Please choose a smaller photo.');const bmp=await createImageBitmap(file);try{const scale=Math.min(1,1600/bmp.width,1600/bmp.height),canvas=document.createElement('canvas');canvas.width=Math.round(bmp.width*scale);canvas.height=Math.round(bmp.height*scale);canvas.getContext('2d').drawImage(bmp,0,0,canvas.width,canvas.height);return await new Promise((res,rej)=>canvas.toBlob(b=>b?res(b):rej(Error('Image conversion failed')),'image/jpeg',.85))}finally{bmp.close()}}
 $('#fi').onchange=async e=>{const files=[...e.target.files];if(files.length+formPhotos.length>8){alert('Maximum 8 photos per product.');e.target.value='';return}photoBusy=true;try{for(const f of files){if(!['image/jpeg','image/png','image/webp'].includes(f.type))throw Error('Please choose JPG, PNG or WEBP photos');const blob=await compress(f);const preview=URL.createObjectURL(blob);formPhotos.push({blob,preview})}drawPhotos()}catch(err){alert(em(err))}finally{photoBusy=false;e.target.value=''}};
-$('#fsv').onclick=async()=>{if(photoBusy)return;const n=$('#fn').value.trim(),pz=Number($('#fpz').value),s={};$('#fs').querySelectorAll('input').forEach(i=>{if(Number(i.value)>0)s[i.dataset.z]=Number(i.value)});
+$('#fsv').onclick=async()=>{if(photoBusy)return;const n=$('#fn').value.trim(),pz=Number($('#fpz').value),s={};$('#fs').querySelectorAll('input').forEach(i=>{if(Number.isFinite(Number(i.value))&&Number(i.value)>=0)s[i.dataset.z]=Math.floor(Number(i.value))});
 if(!n||!Number.isFinite(pz)||pz<=0){alert('Enter product name and valid price.');return}
 const names=formColours.map(c=>c.name.trim()).filter(Boolean);
 if(names.length!==formColours.length||new Set(names.map(n=>n.toLowerCase())).size!==names.length){alert('Enter a unique name for every colour.');return}
-if(formColours.length&&!formColours.some(c=>Object.values(c.stock).some(v=>Number(v)>0))){alert('Set available stock for at least one colour.');return}
-if(!formColours.length&&!Object.keys(s).length){alert('Enter at least one available size.');return}
 if(formPhotos.some(a=>a.colour&&!names.includes(a.colour))){alert('Assign photos only to defined colours.');return}
 const bt=$('#fsv');bt.textContent='Saving…';bt.disabled=true;const uploaded=[];
 try{const urls=[];for(const f of formPhotos){if(f.url){urls.push(f.url);continue}const path=crypto.randomUUID()+'.jpg';const up=await sb.storage.from('products').upload(path,f.blob,{contentType:'image/jpeg',upsert:false});if(up.error)throw Error('Photo upload failed: '+em(up.error));uploaded.push(path);urls.push(sb.storage.from('products').getPublicUrl(path).data.publicUrl)}
-const colourStock={};for(const c of formColours){const stock={};for(const [z,v] of Object.entries(c.stock)){const count=Math.max(0,Math.floor(Number(v)||0));if(count>0)stock[z]=count}colourStock[c.name.trim()]=stock}
+const colourStock={};for(const c of formColours){const stock={};for(const [z,v] of Object.entries(c.stock)){const count=Math.max(0,Math.floor(Number(v)||0));stock[z]=count}colourStock[c.name.trim()]=stock}
 const aggregate=formColours.length?Object.values(colourStock).reduce((a,st)=>{for(const [z,v] of Object.entries(st))a[z]=(a[z]||0)+v;return a},{}):s;
 const payload={name:n,price:pz,category:$('#fc').value,description:$('#fd').value.trim(),images:urls,image_url:urls[0]||null,stock:aggregate,photo_colours:formPhotos.map(a=>(a.colour||'').trim()),colour_stock:colourStock};
 const r=editing?await sb.from('products').update(payload).eq('id',editing.id).select().single():await sb.from('products').insert(payload).select().single();if(r.error)throw Error('Product save failed: '+em(r.error));
