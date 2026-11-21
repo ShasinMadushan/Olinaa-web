@@ -188,6 +188,95 @@ footer{padding-bottom:60px}
 #fm{transform:translateX(105%)}
 }
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;transition-duration:.01s!important}}
+
+/* Olinaa gallery v2 — full boutique image inspection */
+.gallery-kicker{display:flex;justify-content:space-between;gap:12px;align-items:center;color:var(--gold2);font-size:10px;letter-spacing:.19em;font-weight:600;margin-bottom:11px}
+.gallery-main{height:clamp(275px,48vh,600px);border:1px solid #d9b25f2c;border-radius:22px;background:radial-gradient(circle at 50% 40%,#2b2033,#120e18 80%);isolation:isolate}
+.gallery-main img{display:block;width:100%;height:100%;object-fit:contain;transition:opacity .2s ease}
+.gallery-main::after{content:'';pointer-events:none;position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px #ffffff10}
+.gallery-main button{z-index:3;bottom:14px;right:14px;background:#160e1de8;border:1px solid #dbc28b88;padding:12px 16px;box-shadow:0 8px 30px #0007;font:600 12px var(--sans);letter-spacing:.02em}
+.gallery-main button:hover,.gallery-navigation button:hover{background:#d9b25f;color:#1b1020}
+.gallery-badge{position:absolute;top:13px;left:13px;z-index:2;background:#0a070acb;border:1px solid #ffffff30;border-radius:30px;padding:8px 11px;font-size:12px;color:white}
+.gallery-navigation{margin-top:12px;padding:0 2px}
+.gallery-navigation button{width:42px;height:42px;font-size:24px;border-color:#d9b25f88}
+.gallery-navigation span{color:var(--gold2);letter-spacing:.09em;font-size:12px;font-weight:500}
+.gallery-thumbs{gap:10px;overflow:auto;padding:14px 1px 7px;scroll-snap-type:x proximity}
+.gallery-thumbs button{position:relative;width:75px;height:91px;border-radius:12px;border:2px solid #ffffff35;flex:none;scroll-snap-align:start;background:#201724;transition:transform .15s,border-color .15s}
+.gallery-thumbs button.on{border-color:var(--gold);box-shadow:0 0 0 2px #d9b25f33}
+.gallery-thumbs button:hover{transform:translateY(-2px)}
+.gallery-thumbs img{width:100%;height:100%;object-fit:cover}
+.gallery-thumbs span{position:absolute;bottom:2px;right:3px;font-size:10px;color:#fff;background:#0009;border-radius:9px;padding:1px 5px}
+.gallery-help{font-size:12px;line-height:1.5;color:var(--mut);margin:3px 0 13px}
+#sh h3{line-height:1.07;overflow-wrap:anywhere}
+#sh .details{font-size:14px;line-height:1.75}
+#sh .wa{position:relative;margin-top:13px;font-size:15px}
+.zoom-overlay{background:#07050af8}
+.zoom-stage{inset:86px 12px 160px;cursor:grab}
+.zoom-stage:active{cursor:grabbing}
+.zoom-top{padding:16px 22px;gap:16px}
+#zoomtitle{max-width:calc(100% - 70px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:500 20px var(--serif)}
+.zoom-thumbs{position:absolute;bottom:105px;left:0;right:0;display:flex;justify-content:center;gap:8px;overflow-x:auto;padding:8px 15px;z-index:2;scrollbar-width:thin}
+.zoom-thumbs button{height:48px;width:42px;flex:none;border:2px solid #ffffff50;border-radius:8px;overflow:hidden;background:#16111b;padding:0;cursor:pointer}
+.zoom-thumbs button.on{border-color:var(--gold)}
+.zoom-thumbs img{width:100%;height:100%;object-fit:cover}
+.zoom-hint{bottom:86px;left:8px;right:8px}
+.zoom-controls{bottom:18px;gap:clamp(8px,4vw,22px)}
+.zoom-controls button{width:43px;height:43px}
+@media(min-width:760px){
+  #sh{width:min(1100px,94vw);max-height:min(790px,94dvh);grid-template-columns:minmax(0,1.05fr) minmax(300px,.85fr);align-content:start;gap:8px 35px;overflow-y:auto;padding:28px 32px}
+  .product-gallery{grid-column:1;grid-row:1/9;align-self:start;position:sticky;top:0}
+  .gallery-main{height:clamp(340px,51vh,520px)}
+  #sh h3{font-size:clamp(34px,3.6vw,52px);align-self:end;margin-top:20px}
+  #sh h3,#sh #shpr,#sh .sz,#sh .wa,#sh .details,#sh .stock-hint{grid-column:2}
+  .zoom-stage{inset:78px 8vw 155px}
+}
+@media(max-width:759px){
+ #sh{padding:18px 17px calc(22px + env(safe-area-inset-bottom));max-height:96dvh;border-radius:26px 26px 0 0}
+ .gallery-main{height:clamp(295px,46dvh,520px)}
+ .gallery-thumbs button{width:69px;height:80px}
+ .zoom-stage{inset:78px 5px 166px}
+}
+
+/* Product options: gallery above, item information and colour/size beneath on phones. */
+#sh{display:block}
+#sh .product-gallery{margin-bottom:18px}
+#sh .gallery-kicker{display:none}
+#sh .gallery-main{height:clamp(255px,42dvh,460px);border-radius:18px;background:#201825}
+#sh .gallery-main img{object-fit:contain}
+#sh .gallery-navigation{display:flex;align-items:center;justify-content:space-between;margin-top:8px}
+#sh .gallery-navigation[hidden]{display:none}
+#sh .gallery-thumbs{display:flex;gap:9px;margin:0 0 18px;padding:8px 1px}
+#sh .gallery-thumbs button{width:62px;height:73px;border-radius:11px}
+#sh .gallery-thumbs span{bottom:0;left:0;right:0;border-radius:0;background:#000b;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:center}
+#sh h3{font:500 clamp(29px,5vw,42px)/1.08 var(--serif);margin:0 0 7px}
+#sh #shpr{display:block;font:600 27px var(--serif);margin-bottom:17px}
+#sh .details{margin-top:15px;color:var(--mut);font-size:13px;line-height:1.7}
+#sh .option-title{font:500 14px var(--sans);margin:18px 0 10px;color:var(--tx)}
+#sh .colourwrap{padding-top:11px;border-top:1px solid #ffffff20}
+#sh .colourwrap[hidden],#sh .option-title[hidden]{display:none}
+#sh #selectedcolour{color:var(--gold);font-size:12px}
+#sh .colours{display:flex;gap:10px;flex-wrap:wrap}
+#sh .colour-choice{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;min-width:60px;max-width:100px;min-height:49px;padding:6px;border-radius:12px;background:#ffffff07;border:1px solid #ffffff31;color:var(--tx);font:500 12px var(--sans);cursor:pointer}
+#sh .colour-choice.on{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
+#sh .colour-choice img{height:47px;width:48px;object-fit:cover;border-radius:7px}
+#sh .sz{margin:10px 0 9px;flex-wrap:wrap}
+#sh .stock-hint{font-size:12px;color:var(--mut)}
+#sh .wa{margin-top:17px}
+.colour-editor{padding:14px;border:1px solid #d9b25f33;border-radius:16px}
+.colour-editor-title{display:flex;align-items:center;justify-content:space-between;gap:8px;font-weight:600}
+.colour-editor button{background:#d9b25f1c;color:var(--gold);border:1px solid #d9b25f55;border-radius:9px;padding:7px;font:inherit;cursor:pointer}
+.owner-colour{margin-top:13px;padding:12px;border:1px solid #ffffff25;border-radius:12px}
+.owner-colour-head{display:flex;gap:7px;align-items:center}
+.owner-colour-head input{flex:1;min-width:0}
+.owner-colour .fs{margin-top:7px}
+.form-photo select.photo-colour{position:absolute;bottom:0;left:0;right:0;width:100%;padding:6px 2px;border-radius:0;background:#1a1120e8;font-size:11px}
+.form-photo small{top:2px;bottom:auto}
+@media(min-width:760px){
+ #sh{display:grid;grid-template-columns:minmax(0,1fr) minmax(290px,.9fr);column-gap:34px;row-gap:7px;align-content:start}
+ #sh .product-gallery{grid-column:1;grid-row:1 / span 9;position:sticky;top:0;align-self:start}
+ #sh h3,#sh #shpr,#sh #colourwrap,#sh #sizetitle,#sh .sz,#sh .details,#sh .stock-hint,#sh .wa{grid-column:2}
+ #sh .gallery-main{height:clamp(300px,48vh,490px)}
+}
 </style></head>
 <body>
 <svg width="0" height="0" style="position:absolute"><defs>
@@ -233,11 +322,11 @@ footer{padding-bottom:60px}
 <div id="adm"><div class="ah"><b class="gold">Owner panel</b><button class="ib" id="ax">✕</button></div>
 <div id="lock"><p class="lead" id="lm">Owner sign in</p><input id="em" type="email" placeholder="Email" autocomplete="username"><input id="pin" type="password" placeholder="Password" autocomplete="current-password" style="width:100%;letter-spacing:0;font-size:15px"><button class="cta on" id="pgo">Sign in</button></div>
 <div id="ab" hidden><button class="lk" id="so">Sign out</button><button class="cta on" id="add" style="width:100%;justify-content:center">＋ Add clothes</button><div id="al"></div></div></div>
-<div id="fm"><h3 style="font:500 32px var(--serif)">Add clothes</h3><label class="photo-add">＋ Add product photos (optional)<input type="file" id="fi" accept="image/jpeg,image/png,image/webp" multiple></label><div class="mini">Choose one or several photos. Tap × to remove. First photo is the cover. Max 8 images, 5 MB each.</div><div class="form-photos" id="previews"></div><input id="fn" placeholder="Name, e.g. Rose Satin Dress"><input id="fpz" type="number" inputmode="numeric" placeholder="Price in Rs."><select id="fc"></select><textarea id="fd" placeholder="Product details: fabric, fit, measurements, colour, care instructions..."></textarea><p class="lead" style="margin:4px 0 0">How many pieces in each size?</p><div class="fs" id="fs"></div><button class="cta on" id="fsv" style="justify-content:center">Save piece</button><button class="lk" id="fcx">Cancel</button></div>
+<div id="fm"><h3 style="font:500 32px var(--serif)">Add clothes</h3><label class="photo-add">＋ Add product photos (optional)<input type="file" id="fi" accept="image/jpeg,image/png,image/webp" multiple></label><div class="mini">Choose one or several photos. Tap × to remove. First photo is the cover. Max 8 images, 5 MB each.</div><div class="form-photos" id="previews"></div><div class="colour-editor"><div class="colour-editor-title">Colour options <button type="button" id="addcolour">+ Add colour</button></div><p class="mini">For each colour, set its available sizes and assign the matching photos. Leave this empty for a single-colour/standard item.</p><div id="colourrows"></div></div><input id="fn" placeholder="Name, e.g. Rose Satin Dress"><input id="fpz" type="number" inputmode="numeric" placeholder="Price in Rs."><select id="fc"></select><textarea id="fd" placeholder="Product details: fabric, fit, measurements, colour, care instructions..."></textarea><p class="lead" style="margin:4px 0 0">How many pieces in each size?</p><div class="fs" id="fs"></div><button class="cta on" id="fsv" style="justify-content:center">Save piece</button><button class="lk" id="fcx">Cancel</button></div>
 <div id="ov"></div>
-<div id="sh"><div class="grab"></div><div class="product-gallery"><div class="gallery-main" id="shp"></div><div class="gallery-navigation" id="gnav"><button id="gprev" aria-label="Previous image">‹</button><span id="gcount"></span><button id="gnext" aria-label="Next image">›</button></div><div class="gallery-thumbs" id="gthumbs"></div></div><h3 id="sht"></h3><span class="gold" id="shpr" style="font:600 24px var(--serif)"></span><p class="details" id="shdesc"></p><div class="sz" id="szs"></div><div class="stock-hint" id="stockhint"></div><a class="wa" id="wa" target="_blank" rel="noopener">Order on WhatsApp</a></div>
+<div id="sh"><div class="grab"></div><div class="product-gallery"><div class="gallery-kicker"><span>OLINAA COLLECTION</span><span id="gallerylabel">PRODUCT PHOTOS</span></div><div class="gallery-main" id="shp"></div><div class="gallery-navigation" id="gnav"><button id="gprev" aria-label="Previous image">‹</button><span id="gcount"></span><button id="gnext" aria-label="Next image">›</button></div><div class="gallery-thumbs" id="gthumbs"></div></div><h3 id="sht"></h3><span class="gold" id="shpr" style="font:600 24px var(--serif)"></span><div id="colourwrap" class="colourwrap" hidden><div class="option-title">Select colour <span id="selectedcolour"></span></div><div id="colours" class="colours"></div></div><div class="option-title" id="sizetitle">Select size</div><div class="sz" id="szs"></div><p class="details" id="shdesc"></p><div class="stock-hint" id="stockhint"></div><a class="wa" id="wa" target="_blank" rel="noopener">Order on WhatsApp</a></div>
 </div>
-<div id="zoom" class="zoom-overlay" role="dialog" aria-modal="true" aria-label="Photo viewer"><div class="zoom-top"><span id="zoomtitle">Product photo</span><button id="zoomclose" aria-label="Close zoom">×</button></div><div class="zoom-stage" id="zoomstage"><img id="zoomimg" alt="Zoomed product photo"></div><div class="zoom-hint">Pinch or double-tap to zoom · Drag to inspect · Swipe when not zoomed</div><div class="zoom-controls"><button id="zprev" aria-label="Previous photo">‹</button><button id="zminus" aria-label="Zoom out">−</button><span id="zcount">1 / 1</span><button id="zplus" aria-label="Zoom in">+</button><button id="znext" aria-label="Next photo">›</button></div></div>
+<div id="zoom" class="zoom-overlay" role="dialog" aria-modal="true" aria-label="Photo viewer"><div class="zoom-top"><span id="zoomtitle">Product photo</span><button id="zoomclose" aria-label="Close zoom">×</button></div><div class="zoom-stage" id="zoomstage"><img id="zoomimg" alt="Zoomed product photo"></div><div class="zoom-thumbs" id="zthumbs"></div><div class="zoom-hint">Pinch or double-tap to zoom · Drag to inspect · Swipe for next photo</div><div class="zoom-controls"><button id="zprev" aria-label="Previous photo">‹</button><button id="zminus" aria-label="Zoom out">−</button><span id="zcount">1 / 1</span><button id="zplus" aria-label="Zoom in">+</button><button id="znext" aria-label="Next photo">›</button></div></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0/dist/umd/supabase.js"></script>
 <script>
@@ -247,13 +336,13 @@ let P=[],loaded=false;
 const sb=supabase.createClient(CFG.url,CFG.key);
 const cl=['#a23b62','#2d2a6b','#0f6a52','#6c4a9e','#8a6a1d','#b76e79'];
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const imagesOf=r=>Array.isArray(r.images)?r.images.filter(x=>typeof x==='string'&&x.startsWith('https://')):(r.image_url?[r.image_url]:[]);
-const mp=r=>({id:r.id,n:r.name,p:r.price,c:r.category,img:imagesOf(r)[0]||'',imgs:imagesOf(r),desc:r.description||'',s:r.stock||{},h:r.hidden,t:r.is_new?'New':'',col:cl[parseInt(r.id.slice(0,2),16)%6]});
+const imagesOf=r=>{const list=Array.isArray(r.images)?r.images.filter(x=>typeof x==='string'&&/^https:\/\//.test(x)):[];return list.length?list:(r.image_url?[r.image_url]:[])};
+const mp=r=>({id:r.id,n:r.name,p:r.price,c:r.category,img:imagesOf(r)[0]||'',imgs:imagesOf(r),photoColours:Array.isArray(r.photo_colours)?r.photo_colours:[],colourStock:r.colour_stock&&typeof r.colour_stock==='object'?r.colour_stock:{},desc:r.description||'',s:r.stock||{},h:r.hidden,t:r.is_new?'New':'',col:cl[parseInt(r.id.slice(0,2),16)%6]});
 async function load(){const{data,error}=await sb.from('products').select('*').order('created_at',{ascending:false});loaded=true;
 if(error){console.error(error);$('#grid').innerHTML='<p class="lead">Could not load collection. Check Supabase permissions.</p>';return}
 P=data.map(mp);draw();if($('#adm').classList.contains('o')&&!$('#ab').hidden)rl()}
 const cats=['All','Dresses','Frocks','Tops','Bottoms','Accessories'];
-const $=s=>document.querySelector(s),app=$('#app');let saved=new Set(JSON.parse(localStorage.getItem('olinaa_favorites')||'[]')),cur='All',sel=null,size='M',gal=0;
+const $=s=>document.querySelector(s),app=$('#app');let saved=new Set(JSON.parse(localStorage.getItem('olinaa_favorites')||'[]')),cur='All',sel=null,size='M',gal=0,chosenColour='';
 const fmt=n=>'Rs. '+Number(n).toLocaleString();
 const dress=`<svg viewBox="0 0 60 100"><use href="#dr"/></svg>`;
 // headline
@@ -275,20 +364,30 @@ $('#cnt').textContent=sl.length?'('+sl.length+')':'';$('#hq').textContent=sl.len
 $('#search').oninput=draw;$('#sort').onchange=draw;
 draw();
 // gallery & product detail
-function gallery(){const p=P[sel];if(!p)return;const urls=p.imgs,has=urls.length>0;gal=Math.max(0,Math.min(gal,urls.length-1));
-$('#shp').innerHTML=has?`<img id="gmain" src="${esc(urls[gal])}" alt="${esc(p.n)} photo ${gal+1}"><button id="expand" aria-label="Zoom photo">⤢ Zoom</button>`:dress;
-$('#gthumbs').innerHTML=urls.length>1?urls.map((u,i)=>`<button data-g="${i}" class="${i===gal?'on':''}" aria-label="View photo ${i+1}"><img src="${esc(u)}" alt=""></button>`).join(''):'';
+function gallery(){const p=P[sel];if(!p)return;const urls=p.imgs,has=urls.length>0;gal=Math.max(0,Math.min(gal,urls.length-1));const selectedPhotoColour=p.photoColours[gal];if(selectedPhotoColour&&colourNames(p).includes(selectedPhotoColour)){chosenColour=selectedPhotoColour;renderColourOptions();renderSizes()}
+$('#shp').innerHTML=has?`<img id="gmain" src="${esc(urls[gal])}" alt="${esc(p.n)} photo ${gal+1}"><div class="gallery-badge">${gal+1} / ${urls.length}</div><button id="expand" aria-label="Open full screen image viewer">⤢ View full screen</button>`:dress;
+$('#gthumbs').innerHTML=urls.length>1?urls.map((u,i)=>`<button data-g="${i}" class="${i===gal?'on':''}" aria-label="View photo ${i+1}" aria-pressed="${i===gal}"><img loading="lazy" src="${esc(u)}" alt="${esc(p.n)} view ${i+1}"><span>${esc(p.photoColours[i]||String(i+1))}</span></button>`).join(''):'';
+$('#gallerylabel').textContent=has?`${urls.length} ${urls.length===1?'PHOTO':'PHOTOS'}`:'NO PHOTO YET';
 $('#gnav').hidden=urls.length<2;$('#gcount').textContent=`${gal+1} / ${urls.length}`}
-function open(k){sel=k;gal=0;const p=P[k];if(!p)return;gallery();$('#sht').textContent=p.n;$('#shpr').textContent=fmt(p.p);$('#shdesc').textContent=p.desc||'Ask us on WhatsApp about fabric, fit, or measurements.';
-const sz=Object.keys(p.s);size=sz.find(x=>p.s[x]>0)||sz[0]||'';
-$('#szs').innerHTML=sz.map(z=>`<button data-size="${esc(z)}" class="${z===size?'on':''}${p.s[z]?'':' x'}" ${p.s[z]?'':'disabled'}>${esc(z)}</button>`).join('');upd();$('#ov').classList.add('o');$('#sh').classList.add('o')}
-function upd(){const p=P[sel];if(!p)return;const available=size&&p.s[size]>0;$('#stockhint').textContent=!size?'Out of stock':available?`${p.s[size]} available in ${size}`:'Selected size unavailable';
+function colourNames(p){return Object.keys(p.colourStock||{}).filter(x=>x.trim())}
+function selectedStock(p){return chosenColour?(p.colourStock[chosenColour]||{}):p.s}
+function renderColourOptions(){const p=P[sel],names=colourNames(p);$('#colourwrap').hidden=!names.length;
+$('#colours').innerHTML=names.map(name=>{const photoIndex=p.photoColours.indexOf(name),url=photoIndex>=0?p.imgs[photoIndex]:null;return `<button type="button" class="colour-choice${chosenColour===name?' on':''}" data-colour="${esc(name)}" aria-pressed="${chosenColour===name}">${url?`<img src="${esc(url)}" alt="">`:''}<span>${esc(name)}</span></button>`}).join('');
+$('#selectedcolour').textContent=chosenColour?'— '+chosenColour:''}
+function renderSizes(){const p=P[sel],stock=selectedStock(p);const sz=Object.keys(stock).filter(z=>z);if(!sz.includes(size)||!(stock[size]>0))size=sz.find(z=>stock[z]>0)||'';
+$('#szs').innerHTML=sz.map(z=>`<button data-size="${esc(z)}" class="${z===size?'on':''}${stock[z]?'':' x'}" ${stock[z]?'':'disabled'}>${esc(z)}</button>`).join('');$('#sizetitle').hidden=!sz.length;upd()}
+function open(k){sel=k;gal=0;const p=P[k];if(!p)return;chosenColour=colourNames(p)[0]||'';
+if(chosenColour){const i=p.photoColours.indexOf(chosenColour);if(i>=0)gal=i}
+gallery();$('#sht').textContent=p.n;$('#shpr').textContent=fmt(p.p);$('#shdesc').textContent=p.desc||'Ask us on WhatsApp about fabric, fit, or measurements.';
+size='';renderColourOptions();renderSizes();$('#ov').classList.add('o');$('#sh').classList.add('o')}
+function upd(){const p=P[sel];if(!p)return;const stock=selectedStock(p),available=size&&Number(stock[size])>0;$('#stockhint').textContent=!size?'Currently unavailable':available?`${stock[size]} available in ${size}${chosenColour?' · '+chosenColour:''}`:'Selected option unavailable';
 $('#wa').style.opacity=available?'1':'.5';$('#wa').style.pointerEvents=available?'auto':'none';$('#wa').setAttribute('aria-disabled',available?'false':'true');
-$('#wa').href=available?'https://wa.me/'+CFG.wa+'?text='+encodeURIComponent(`Hi Olinaa, I’d like to order: ${p.n} (size ${size}) – ${fmt(p.p)}. Product: ${location.origin+location.pathname}?product=${encodeURIComponent(p.id)}`):'#'}
+$('#wa').href=available?'https://wa.me/'+CFG.wa+'?text='+encodeURIComponent(`Hi Olinaa, I'd like to order: ${p.n}${chosenColour?' | Colour: '+chosenColour:''} | Size: ${size} | ${fmt(p.p)}. Product: ${location.origin+location.pathname}?product=${encodeURIComponent(p.id)}`):'#'}
+$('#colours').onclick=e=>{const b=e.target.closest('[data-colour]');if(!b)return;chosenColour=b.dataset.colour;const idx=P[sel].photoColours.indexOf(chosenColour);if(idx>=0)gal=idx;gallery();renderColourOptions();renderSizes()};
 $('#szs').onclick=e=>{const b=e.target.closest('button[data-size]');if(!b||b.disabled)return;size=b.dataset.size;[...$('#szs').children].forEach(x=>x.classList.toggle('on',x===b));upd()};
 $('#gprev').onclick=()=>{gal=(gal-1+P[sel].imgs.length)%P[sel].imgs.length;gallery()};
 $('#gnext').onclick=()=>{gal=(gal+1)%P[sel].imgs.length;gallery()};
-$('#gthumbs').onclick=e=>{const b=e.target.closest('button[data-g]');if(b){gal=+b.dataset.g;gallery()}};
+$('#gthumbs').onclick=e=>{const b=e.target.closest('button[data-g]');if(b){gal=+b.dataset.g;const c=P[sel].photoColours[gal];if(c&&colourNames(P[sel]).includes(c)){chosenColour=c;renderColourOptions();renderSizes()}gallery()}};
 $('#shp').onclick=e=>{if(e.target.closest('img,button')&&P[sel]?.imgs.length)openZoom()};
 let gTouch=0;$('#shp').addEventListener('touchstart',e=>{gTouch=e.touches[0]?.clientX||0},{passive:true});$('#shp').addEventListener('touchend',e=>{if(P[sel]?.imgs.length<2)return;const d=(e.changedTouches[0]?.clientX||0)-gTouch;if(Math.abs(d)>45){gal=(gal+(d<0?1:-1)+P[sel].imgs.length)%P[sel].imgs.length;gallery()}},{passive:true});
 function closeDetail(){$('#ov').classList.remove('o');$('#sh').classList.remove('o')}
@@ -301,10 +400,11 @@ let zoomScale=1,zx=0,zy=0,activeTouches=new Map(),prevDist=0,prevMid=null,dragSt
 const zimg=$('#zoomimg');
 function renderZoom(){zimg.style.transform=`translate(${zx}px,${zy}px) scale(${zoomScale})`}
 function setZoom(n){zoomScale=Math.max(1,Math.min(5,n));if(zoomScale===1){zx=0;zy=0}renderZoom()}
-function zoomPhoto(delta){const arr=P[sel]?.imgs||[];if(!arr.length)return;gal=(gal+delta+arr.length)%arr.length;zimg.src=arr[gal];$('#zcount').textContent=`${gal+1} / ${arr.length}`;setZoom(1);gallery()}
-function openZoom(){if(!P[sel]?.imgs.length)return;$('#zoom').classList.add('o');document.body.style.overscrollBehavior='none';$('#zoomtitle').textContent=P[sel].n;zimg.src=P[sel].imgs[gal];$('#zcount').textContent=`${gal+1} / ${P[sel].imgs.length}`;setZoom(1)}
+function zoomPhoto(delta){const arr=P[sel]?.imgs||[];if(!arr.length)return;gal=(gal+delta+arr.length)%arr.length;renderViewerImage();gallery()}
+function renderViewerImage(){const arr=P[sel]?.imgs||[];if(!arr.length)return;zimg.src=arr[gal];zimg.alt=`${P[sel].n} — photo ${gal+1} of ${arr.length}`;$('#zcount').textContent=`${gal+1} / ${arr.length}`;$('#zthumbs').innerHTML=arr.length>1?arr.map((u,i)=>`<button type="button" data-zg="${i}" class="${i===gal?'on':''}" aria-label="Show photo ${i+1}"><img src="${esc(u)}" alt=""></button>`).join(''):'';setZoom(1)}
+function openZoom(){if(!P[sel]?.imgs.length)return;$('#zoom').classList.add('o');document.body.style.overscrollBehavior='none';$('#zoomtitle').textContent=P[sel].n;renderViewerImage();$('#zoomclose').focus()}
 function closeZoom(){$('#zoom').classList.remove('o');activeTouches.clear();document.body.style.overscrollBehavior='';setZoom(1)}
-$('#zoomclose').onclick=closeZoom;$('#zprev').onclick=()=>zoomPhoto(-1);$('#znext').onclick=()=>zoomPhoto(1);$('#zplus').onclick=()=>setZoom(zoomScale+.5);$('#zminus').onclick=()=>setZoom(zoomScale-.5);
+$('#zthumbs').onclick=e=>{const b=e.target.closest('button[data-zg]');if(!b)return;gal=+b.dataset.zg;renderViewerImage();gallery()};$('#zoomclose').onclick=closeZoom;$('#zprev').onclick=()=>zoomPhoto(-1);$('#znext').onclick=()=>zoomPhoto(1);$('#zplus').onclick=()=>setZoom(zoomScale+.5);$('#zminus').onclick=()=>setZoom(zoomScale-.5);
 $('#zoomstage').addEventListener('dblclick',()=>setZoom(zoomScale>1?1:2.5));
 $('#zoomstage').addEventListener('wheel',e=>{e.preventDefault();setZoom(zoomScale+(e.deltaY<0?.25:-.25))},{passive:false});
 const stage=$('#zoomstage');
@@ -315,7 +415,7 @@ stage.addEventListener('pointercancel',e=>{activeTouches.delete(e.pointerId);pre
 document.addEventListener('keydown',e=>{if($('#zoom').classList.contains('o')){if(e.key==='Escape')closeZoom();else if(e.key==='ArrowLeft')zoomPhoto(-1);else if(e.key==='ArrowRight')zoomPhoto(1);else if(e.key==='+')setZoom(zoomScale+.5);else if(e.key==='-')setZoom(zoomScale-.5)}else if(e.key==='Escape')closeDetail()});
 // nav
 const links=[...document.querySelectorAll('nav a')];
-function go(t){const el=$('#'+t);app.scrollTo({top:el.getBoundingClientRect().top-app.getBoundingClientRect().top+app.scrollTop-(innerWidth>=760?70:60),behavior:'smooth'})}
+function go(t){const el=$('#'+t);app.scrollTo({top:el.getBoundingClientRect().top-app.getBoundingClientRect().top+app.scrollTop-(innerWidth>=760?140:75),behavior:'smooth'})}
 links.forEach(a=>a.onclick=()=>go(a.dataset.t));
 function act(t){links.forEach((a,i)=>{const on=a.dataset.t==t;a.classList.toggle('on',on);if(on)$('#pill').style.transform=`translateX(${i*76}px)`})}
 const secs=[...document.querySelectorAll('[data-s]')];
@@ -337,7 +437,7 @@ $('#pgo').onclick=async()=>{const{error}=await sb.auth.signInWithPassword({email
 if(error){$('#pin').classList.add('bad');setTimeout(()=>$('#pin').classList.remove('bad'),500);$('#lm').textContent='Wrong email or password';return}
 $('#pin').value='';$('#lock').hidden=true;$('#ab').hidden=false;rl()};
 $('#so').onclick=async()=>{await sb.auth.signOut();$('#ab').hidden=true;$('#lock').hidden=false};
-function rl(){$('#al').innerHTML=P.map((p,k)=>`<div class="ar${p.h?' hd':''}"><div class="at"><div class="th" style="--c:${p.col}">${p.img?`<img src="${esc(p.img)}">`:''}</div><div><b>${esc(p.n)}</b><small>${fmt(p.p)} – ${esc(p.c)} · ${p.imgs.length} photo(s)</small></div></div>`+Object.keys(p.s).map(z=>`<div class="st"><span>${esc(z)}</span><button data-k="${k}" data-z="${esc(z)}" data-d="-1">−</button><em>${p.s[z]}</em><button data-k="${k}" data-z="${esc(z)}" data-d="1">+</button></div>`).join('')+`<div class="ac"><button data-k="${k}" data-edit>Edit details & photos</button><button data-k="${k}" data-h>${p.h?'Show':'Hide'}</button><button data-k="${k}" data-x>Delete</button></div></div>`).join('')}
+function rl(){$('#al').innerHTML=P.map((p,k)=>`<div class="ar${p.h?' hd':''}"><div class="at"><div class="th" style="--c:${p.col}">${p.img?`<img src="${esc(p.img)}">`:''}</div><div><b>${esc(p.n)}</b><small>${fmt(p.p)} – ${esc(p.c)} · ${p.imgs.length} photo(s)</small></div></div>`+(colourNames(p).length?'<div class="mini">Stock managed by colour — select Edit details & photos</div>':Object.keys(p.s).map(z=>`<div class="st"><span>${esc(z)}</span><button data-k="${k}" data-z="${esc(z)}" data-d="-1">−</button><em>${p.s[z]}</em><button data-k="${k}" data-z="${esc(z)}" data-d="1">+</button></div>`).join(''))+`<div class="ac"><button data-k="${k}" data-edit>Edit details & photos</button><button data-k="${k}" data-h>${p.h?'Show':'Hide'}</button><button data-k="${k}" data-x>Delete</button></div></div>`).join('')}
 const em=e=>{if(!e)return'unknown error';if(typeof e==='string')return e;return e.message||JSON.stringify(e)};
 async function change(p,fields){const r=await sb.from('products').update(fields).eq('id',p.id).select().single();if(r.error){alert('Could not save: '+em(r.error));return false}Object.assign(p,mp(r.data));rl();draw();return true}
 $('#al').onclick=async e=>{const b=e.target.closest('button');if(!b)return;const p=P[+b.dataset.k];if(!p)return;
@@ -345,18 +445,32 @@ if(b.dataset.d){const next={...p.s,[b.dataset.z]:Math.max(0,Number(p.s[b.dataset
 else if('edit' in b.dataset)openForm(p);
 else if('h' in b.dataset)await change(p,{hidden:!p.h});
 else if('x' in b.dataset){if(!confirm('Delete '+p.n+'? This does not automatically delete stored photos.'))return;const r=await sb.from('products').delete().eq('id',p.id).select('id');if(r.error){alert('Could not delete: '+em(r.error));return}P=P.filter(x=>x.id!==p.id);saved.delete(p.id);rl();draw()}};
-let editing=null,formPhotos=[],photoBusy=false;
-function drawPhotos(){$('#previews').innerHTML=formPhotos.map((a,i)=>`<div class="form-photo"><img src="${esc(a.preview||a.url)}" alt="Product photo ${i+1}"><button type="button" data-rm="${i}" aria-label="Remove photo">×</button><small>${i===0?'Cover':i+1}</small></div>`).join('')}
-function openForm(p=null){editing=p;formPhotos=p?p.imgs.map(url=>({url})):[];$('#fm h3').textContent=p?'Edit clothing':'Add clothes';$('#fsv').textContent=p?'Save changes':'Save piece';$('#fn').value=p?.n||'';$('#fpz').value=p?.p||'';$('#fd').value=p?.desc||'';$('#fc').value=p?.c||cats[1];$('#fi').value='';$('#fs').querySelectorAll('input').forEach(i=>i.value=p?.s[i.dataset.z]||0);drawPhotos();$('#fm').classList.add('o')}
+let editing=null,formPhotos=[],formColours=[],photoBusy=false;
+function drawPhotos(){$('#previews').innerHTML=formPhotos.map((a,i)=>`<div class="form-photo"><img src="${esc(a.preview||a.url)}" alt="Product photo ${i+1}"><button type="button" data-rm="${i}" aria-label="Remove photo">×</button><small>${i===0?'Cover':i+1}</small><select class="photo-colour" data-photo-colour="${i}"><option value="">General</option>${formColours.map(c=>`<option value="${esc(c.name)}" ${a.colour===c.name?'selected':''}>${esc(c.name)}</option>`).join('')}</select></div>`).join('')}
+function openForm(p=null){editing=p;formColours=p?Object.entries(p.colourStock).map(([name,stock])=>({name,stock:{...stock}})):[];formPhotos=p?p.imgs.map((url,i)=>({url,colour:p.photoColours[i]||''})):[];$('#fm h3').textContent=p?'Edit clothing':'Add clothes';$('#fsv').textContent=p?'Save changes':'Save piece';$('#fn').value=p?.n||'';$('#fpz').value=p?.p||'';$('#fd').value=p?.desc||'';$('#fc').value=p?.c||cats[1];$('#fi').value='';$('#fs').querySelectorAll('input').forEach(i=>i.value=p?.s[i.dataset.z]||0);drawColours();drawPhotos();$('#fm').classList.add('o')}
 $('#add').onclick=()=>openForm();$('#fcx').onclick=()=>$('#fm').classList.remove('o');
 $('#previews').onclick=e=>{const b=e.target.closest('[data-rm]');if(!b)return;formPhotos.splice(+b.dataset.rm,1);drawPhotos()};
+$('#previews').onchange=e=>{const select=e.target.closest('[data-photo-colour]');if(select)formPhotos[+select.dataset.photoColour].colour=select.value};
+const colourSizes=['S','M','L','XL','One'];
+function drawColours(){$('#colourrows').innerHTML=formColours.map((c,i)=>`<div class="owner-colour" data-colour-index="${i}"><div class="owner-colour-head"><input aria-label="Colour name" data-colour-name="${i}" placeholder="Colour name e.g. Burgundy" value="${esc(c.name)}"><button type="button" data-colour-remove="${i}">Remove</button></div><div class="mini">Available stock for this colour</div><div class="fs">${colourSizes.map(z=>`<label>${z}<input type="number" min="0" step="1" data-colour-stock="${i}" data-stock-size="${z}" value="${Number(c.stock[z]||0)}"></label>`).join('')}</div></div>`).join('')}
+$('#addcolour').onclick=()=>{if(formColours.length>=12){alert('Maximum 12 colours.');return}formColours.push({name:'',stock:{}});drawColours();drawPhotos()};
+$('#colourrows').oninput=e=>{const name=e.target.closest('[data-colour-name]');if(name){const i=+name.dataset.colourName,old=formColours[i].name;formColours[i].name=name.value;formPhotos.forEach(p=>{if(p.colour===old)p.colour=name.value});drawPhotos();return}
+const st=e.target.closest('[data-colour-stock]');if(st){formColours[+st.dataset.colourStock].stock[st.dataset.stockSize]=Math.max(0,Math.floor(Number(st.value)||0))}};
+$('#colourrows').onclick=e=>{const b=e.target.closest('[data-colour-remove]');if(!b)return;const i=+b.dataset.colourRemove,old=formColours[i].name;formColours.splice(i,1);formPhotos.forEach(p=>{if(p.colour===old)p.colour=''});drawColours();drawPhotos()};
 async function compress(file){if(file.size>5*1024*1024)throw Error(file.name+' exceeds 5 MB. Please choose a smaller photo.');const bmp=await createImageBitmap(file);try{const scale=Math.min(1,1600/bmp.width,1600/bmp.height),canvas=document.createElement('canvas');canvas.width=Math.round(bmp.width*scale);canvas.height=Math.round(bmp.height*scale);canvas.getContext('2d').drawImage(bmp,0,0,canvas.width,canvas.height);return await new Promise((res,rej)=>canvas.toBlob(b=>b?res(b):rej(Error('Image conversion failed')),'image/jpeg',.85))}finally{bmp.close()}}
 $('#fi').onchange=async e=>{const files=[...e.target.files];if(files.length+formPhotos.length>8){alert('Maximum 8 photos per product.');e.target.value='';return}photoBusy=true;try{for(const f of files){if(!['image/jpeg','image/png','image/webp'].includes(f.type))throw Error('Please choose JPG, PNG or WEBP photos');const blob=await compress(f);const preview=URL.createObjectURL(blob);formPhotos.push({blob,preview})}drawPhotos()}catch(err){alert(em(err))}finally{photoBusy=false;e.target.value=''}};
 $('#fsv').onclick=async()=>{if(photoBusy)return;const n=$('#fn').value.trim(),pz=Number($('#fpz').value),s={};$('#fs').querySelectorAll('input').forEach(i=>{if(Number(i.value)>0)s[i.dataset.z]=Number(i.value)});
-if(!n||!Number.isFinite(pz)||pz<=0||!Object.keys(s).length){alert('Enter product name, price and at least one available size.');return}
+if(!n||!Number.isFinite(pz)||pz<=0){alert('Enter product name and valid price.');return}
+const names=formColours.map(c=>c.name.trim()).filter(Boolean);
+if(names.length!==formColours.length||new Set(names.map(n=>n.toLowerCase())).size!==names.length){alert('Enter a unique name for every colour.');return}
+if(formColours.length&&!formColours.some(c=>Object.values(c.stock).some(v=>Number(v)>0))){alert('Set available stock for at least one colour.');return}
+if(!formColours.length&&!Object.keys(s).length){alert('Enter at least one available size.');return}
+if(formPhotos.some(a=>a.colour&&!names.includes(a.colour))){alert('Assign photos only to defined colours.');return}
 const bt=$('#fsv');bt.textContent='Saving…';bt.disabled=true;const uploaded=[];
 try{const urls=[];for(const f of formPhotos){if(f.url){urls.push(f.url);continue}const path=crypto.randomUUID()+'.jpg';const up=await sb.storage.from('products').upload(path,f.blob,{contentType:'image/jpeg',upsert:false});if(up.error)throw Error('Photo upload failed: '+em(up.error));uploaded.push(path);urls.push(sb.storage.from('products').getPublicUrl(path).data.publicUrl)}
-const payload={name:n,price:pz,category:$('#fc').value,description:$('#fd').value.trim(),images:urls,image_url:urls[0]||null,stock:s};
+const colourStock={};for(const c of formColours){const stock={};for(const [z,v] of Object.entries(c.stock)){const count=Math.max(0,Math.floor(Number(v)||0));if(count>0)stock[z]=count}colourStock[c.name.trim()]=stock}
+const aggregate=formColours.length?Object.values(colourStock).reduce((a,st)=>{for(const [z,v] of Object.entries(st))a[z]=(a[z]||0)+v;return a},{}):s;
+const payload={name:n,price:pz,category:$('#fc').value,description:$('#fd').value.trim(),images:urls,image_url:urls[0]||null,stock:aggregate,photo_colours:formPhotos.map(a=>(a.colour||'').trim()),colour_stock:colourStock};
 const r=editing?await sb.from('products').update(payload).eq('id',editing.id).select().single():await sb.from('products').insert(payload).select().single();if(r.error)throw Error('Product save failed: '+em(r.error));
 if(editing){const ix=P.findIndex(x=>x.id===editing.id);if(ix>=0)P[ix]=mp(r.data)}else P.unshift(mp(r.data));
 formPhotos.forEach(a=>{if(a.preview)URL.revokeObjectURL(a.preview)});$('#fm').classList.remove('o');rl();draw();
