@@ -1,7 +1,18 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Olinaa</title>
+<title>Olinaa Clothing | Fashion Boutique &amp; Dresses in Sri Lanka</title>
+<meta name="description" content="Discover Olinaa Clothing: dresses, blouses, tops and stylish everyday fashion in Sri Lanka. Browse available colours and sizes, view clothing photos and order via WhatsApp.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://olinaa-web.shasinmadushan.workers.dev/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Olinaa">
+<meta property="og:title" content="Olinaa Clothing | Fashion Boutique in Sri Lanka">
+<meta property="og:description" content="Discover dresses, blouses, tops and beautiful everyday fashion at Olinaa. Explore colours, sizes and order on WhatsApp.">
+<meta property="og:url" content="https://olinaa-web.shasinmadushan.workers.dev/">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Olinaa","alternateName":["Olinaa Clothing","Olina","Olinaa Fashion"],"url":"https://olinaa-web.shasinmadushan.workers.dev/"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ClothingStore","name":"Olinaa","url":"https://olinaa-web.shasinmadushan.workers.dev/","description":"Olinaa clothing boutique in Sri Lanka. Dresses, blouses, tops and everyday fashion.","sameAs":["https://www.facebook.com/p/Olinaa-100060080460762/"]}</script>
 <meta name="theme-color" content="#0c0810"><meta name="apple-mobile-web-app-capable" content="yes"><link rel="manifest" href="manifest.json"><link rel="icon" href="icon.svg">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Outfit:wght@300;400;500;600&display=swap">
 <style>
@@ -360,7 +371,7 @@ footer{padding-bottom:60px}
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0/dist/umd/supabase.js"></script>
 <script>
 const CFG={url:'https://ltabxvsdimoskoaugexm.supabase.co',key:'sb_publishable_rHZggfYFzZTVRk7XVkjq7g_JP9skJgF',
-wa:'94772280385',ig:'',fb:'https://www.facebook.com/p/Olinaa-100060080460762/',addr:''};
+wa:'94XXXXXXXXX',ig:'',fb:'https://www.facebook.com/p/Olinaa-100060080460762/',addr:''};
 let P=[],loaded=false;
 const sb=supabase.createClient(CFG.url,CFG.key);
 const cl=['#a23b62','#2d2a6b','#0f6a52','#6c4a9e','#8a6a1d','#b76e79'];
@@ -444,12 +455,38 @@ stage.addEventListener('pointercancel',e=>{activeTouches.delete(e.pointerId);pre
 document.addEventListener('keydown',e=>{if($('#zoom').classList.contains('o')){if(e.key==='Escape')closeZoom();else if(e.key==='ArrowLeft')zoomPhoto(-1);else if(e.key==='ArrowRight')zoomPhoto(1);else if(e.key==='+')setZoom(zoomScale+.5);else if(e.key==='-')setZoom(zoomScale-.5)}else if(e.key==='Escape')closeDetail()});
 // nav
 const links=[...document.querySelectorAll('nav a')];
-function go(t){const el=$('#'+t);app.scrollTo({top:el.getBoundingClientRect().top-app.getBoundingClientRect().top+app.scrollTop-(innerWidth>=760?140:75),behavior:'smooth'})}
+function go(t){const el=$('#'+t);if(!el)return;app.scrollTo({top:el.getBoundingClientRect().top-app.getBoundingClientRect().top+app.scrollTop-(innerWidth>=760?140:75),behavior:'smooth'})}
+// Browser Back should reverse in-site navigation before leaving the website.
+// Keep a light history snapshot for gallery, product sheet, owner and section navigation.
+let olinaaRestoring=false;
+const olinaaState=()=>({olinaa:true,section:olinaaSection,detail:$('#sh').classList.contains('o')?P[sel]?.id||null:null,zoom:$('#zoom').classList.contains('o'),owner:A.classList.contains('o'),form:$('#fm').classList.contains('o')});
+let olinaaSection='home';
+function olinaaPush(){if(!olinaaRestoring)history.pushState(olinaaState(),'','#'+olinaaSection)}
+function olinaaSync(){if(!olinaaRestoring)history.replaceState(olinaaState(),'','#'+olinaaSection)}
+function olinaaRestore(s){
+ olinaaRestoring=true;
+ try{
+  if($('#zoom').classList.contains('o'))closeZoom();
+  if($('#sh').classList.contains('o'))closeDetail();
+  $('#fm').classList.remove('o');A.classList.remove('o');
+  olinaaSection=s?.section||'home';go(olinaaSection);
+  if(s?.detail){const k=P.findIndex(p=>p.id===s.detail);if(k>=0)open(k)}
+  if(s?.zoom&&s?.detail&&P[sel]?.imgs?.length)openZoom();
+  if(s?.owner)A.classList.add('o');
+  if(s?.form)$('#fm').classList.add('o');
+ }finally{olinaaRestoring=false}
+}
+window.addEventListener('popstate',e=>olinaaRestore(e.state?.olinaa?e.state:{section:'home'}));
+// Preserve an initial in-site entry for Back when a product link is opened directly.
+history.replaceState({olinaa:true,section:'home',detail:null,zoom:false,owner:false,form:false},'',location.href);
+const olinaaGo=go;
+go=function(t){if(!['home','shop','saved','visit'].includes(t))return;const change=olinaaSection!==t;olinaaSection=t;olinaaGo(t);if(change)olinaaPush()};
+
 links.forEach(a=>a.onclick=()=>go(a.dataset.t));
 function act(t){links.forEach((a,i)=>{const on=a.dataset.t==t;a.classList.toggle('on',on);if(on)$('#pill').style.transform=`translateX(${i*76}px)`})}
 const secs=[...document.querySelectorAll('[data-s]')];
 app.addEventListener('scroll',()=>{const y=app.scrollTop;$('#dw').style.translate=`0 ${y*.25}px`;$('#dw').style.opacity=Math.max(0,1-y/520);
-let a='home';secs.forEach(s=>{if(s.offsetTop-300<=y)a=s.id});act(a)},{passive:true});
+let a='home';secs.forEach(s=>{if(s.offsetTop-300<=y)a=s.id});act(a);if(!olinaaRestoring&&!$('#sh').classList.contains('o')&&!A.classList.contains('o')){olinaaSection=a;olinaaSync()}},{passive:true});
 // reveal
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{root:app,threshold:.15});
 document.querySelectorAll('.rv').forEach(r=>io.observe(r));
@@ -551,5 +588,22 @@ document.addEventListener('visibilitychange',()=>{if(!document.hidden)scheduleRe
 // sparkles
 $('#phone').addEventListener('pointerdown',e=>{const r=$('#phone').getBoundingClientRect();for(let i=0;i<7;i++){const s=document.createElement('i');s.className='sp';const a=Math.random()*6.28,d=30+Math.random()*30;
 s.style.cssText=`left:${e.clientX-r.left}px;top:${e.clientY-r.top}px;--x:${Math.cos(a)*d}px;--y:${Math.sin(a)*d}px`;$('#phone').appendChild(s);setTimeout(()=>s.remove(),800)}});
+
+// Register UI changes as browser history entries; mobile Back unwinds overlays naturally.
+const olinaaDetailOpen=open;
+open=function(k){olinaaDetailOpen(k);olinaaPush()};
+const olinaaZoomOpen=openZoom;
+openZoom=function(){const wasOpen=$('#zoom').classList.contains('o');olinaaZoomOpen();if(!wasOpen&&$('#zoom').classList.contains('o'))olinaaPush()};
+const olinaaFormOpen=openForm;
+openForm=function(p){olinaaFormOpen(p);olinaaPush()};
+const olinaaOwnerClick=$('#own').onclick;
+$('#own').onclick=async()=>{await olinaaOwnerClick();olinaaPush()};
+// Closing an overlay by its own button returns to its previous app state.
+function olinaaBackOr(closeFn){if(history.state?.olinaa&&history.length>1)history.back();else closeFn()}
+$('#zoomclose').onclick=()=>olinaaBackOr(closeZoom);
+$('#ov').onclick=()=>olinaaBackOr(closeDetail);
+$('#fcx').onclick=()=>olinaaBackOr(()=>$('#fm').classList.remove('o'));
+$('#ax').onclick=()=>olinaaBackOr(()=>A.classList.remove('o'));
+// Sync internal state changes which don't navigate to a different view.
 </script>
 </body></html>
