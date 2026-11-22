@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://olinaa.pages.dev/sitemap.xml
